@@ -1,0 +1,40 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  &:any-link {
+    color: black;
+  }
+
+  &:-webkit-any-link{
+    color: black;
+  }
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+.body-wrapper {
+  padding-top: 80px;
+}

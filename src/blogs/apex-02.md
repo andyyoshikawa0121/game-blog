@@ -1,6 +1,7 @@
 ---
 title: "ワットソン武器構成考察（レベル100記念）"
 date: "2020-05-24"
+slug: "/blogs/wattson"
 description: ワットソン使ってて楽しいから極めたいです
 ---
 
