@@ -26,19 +26,32 @@ export default function BlogTemplate({
     padding-bottom: 48px;
   `
   const BlogWrapper = styled.div`
-    width: ${isPc ? 'calc(100% - 200px);' : '90%;'}
-    max-width: ${isPc && '1280px'};
-    min-width: ${isPc && '960px'};
+    @media (max-width: 1079px) {
+      width: 90%;
+    }
+
+    @media (min-width: 1080px) {
+      width: calc(100% - 200px);
+      max-width: 1280px;
+      min-width: 960px;
+    }
     margin: 32px auto 0px auto;
   `
   const BlogTitle = styled.h2`
+    @media (max-width: 1079px) {
+      font-size: 24px;
+      margin: 32px auto 64px auto;
+      width: 100%;
+    }
+    @media (min-width: 1080px) {
+      font-size: 48px;
+      margin: 64px auto;
+      width: 80%;
+    }
     color: #64e830;
-    font-size: ${isPc ? '48px': '24px'};
     font-weight: 600;
     text-align: center;
     line-height: 1;
-    margin: ${isPc ? '64px auto':'32px auto 64px auto'};
-    width: ${isPc ? '80%':'100%'};
     position: relative;
     &::before {
       content: '';
@@ -54,7 +67,12 @@ export default function BlogTemplate({
   `
 
   const BlogDate = styled.p`
-    width: ${isPc ? '800px':'100%'};
+    @media (max-width: 1079px) {
+      width: 100%;
+    }
+    @media (min-width: 1080px) {
+      width: 800px;
+    }
     margin: 0 auto 24px auto;
     font-size: 16px;
     font-weight: 600;
@@ -69,7 +87,12 @@ export default function BlogTemplate({
   `
 
   const BlogContent = styled.div`
-    width: ${isPc ? '800px':'100%'};
+    @media (max-width: 1079px) {
+      width: 100%;
+    }
+    @media (min-width: 1080px) {
+      width: 800px;
+    }
     margin: 0 auto;
 
     h1 {

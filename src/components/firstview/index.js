@@ -3,10 +3,21 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 import Image from "../image/index"
 
-export default function FirstView({ TitleText, isPc }) {
+export default function FirstView({ TitleText }) {
   const FirstView = styled.div`
+    @media (max-width: 1079px) {
+      height: 40vh;
+      div {
+        height: 40vh;
+      }
+    }
+    @media (min-width: 1080px) {
+      height: 80vh;
+      div {
+        height: 80vh;
+      }
+    }
     width: 100vw;
-    height: ${isPc ? '80vh' : '40vh'};
     min-height: 300px;
     background-color: gray;
     color: white;
@@ -19,7 +30,6 @@ export default function FirstView({ TitleText, isPc }) {
     overflow: hidden;
     div {
       width: 100%;
-      height: ${isPc ? '80vh' : '40vh'};
       min-height: 300px;
     }
   `

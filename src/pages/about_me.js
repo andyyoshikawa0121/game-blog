@@ -11,7 +11,6 @@ import PostLink from "../components/post-link/index"
 
 
 export default function AboutMe() {
-
   const windowWidth = window.innerWidth;
   const isPcDefault = windowWidth >= 1080;
   const [isPc, setIsPc ] = useState(isPcDefault);
@@ -27,21 +26,35 @@ export default function AboutMe() {
   `
 
   const SectionWrapper = styled.div`
-    width: ${isPc ? 'calc(100% - 200px);' : '90%;'}
-    max-width: ${isPc && '1280px'};
-    min-width: ${isPc && '960px'};
-    padding: 32px 0 ${isPc ? '48px' : '24px'} 0px;
+    @media (max-width: 1079px) {
+      width: 90%;
+      padding: 32px 0px 24px 0px;
+    }
+
+    @media (min-width: 1080px) {
+      width: calc(100% - 200px);
+      max-width: 1280px;
+      min-width: 960px;
+      padding: 32px 0px 48px 0px;
+    }
     margin: 0 auto;
   `
 
   const SectionTitle = styled.h2`
+    @media (max-width: 1079px) {
+      font-size: 24px;
+      margin: 32px auto 64px auto;
+      width: 100%;
+    }
+    @media (min-width: 1080px) {
+      font-size: 48px;
+      margin: 64px auto;
+      width: 80%;
+    }
     color: #64e830;
-    font-size: ${isPc ? '48px': '24px'};
     font-weight: 600;
     text-align: center;
     line-height: 1;
-    margin: ${isPc ? '64px auto':'32px auto 64px auto'};
-    width: ${isPc ? '80%':'100%'};
     position: relative;
     &::before {
       content: '';
@@ -60,10 +73,15 @@ export default function AboutMe() {
   `
 
   const SectionText = styled.p`
+    @media (max-width: 1079px) {
+      width: 100%;
+    }
+    @media (min-width: 1080px) {
+      width: 800px;
+    }
     font-size: 16px;
     text-align: left;
     line-height: 2;
-    width: ${isPc ? '800px':'100%'};
     margin: 0 auto;
   `
   const SubSectionTitle = styled.h3`
@@ -75,7 +93,12 @@ export default function AboutMe() {
     margin: 36px 0px;
   `
   const SnsBox = styled.div`
-    width: ${isPc ? '800px':'100%'};
+    @media (max-width: 1079px) {
+      width: 100%;
+    }
+    @media (min-width: 1080px) {
+      width: 800px;
+    }
     margin-top: 48px;
     margin: 0 auto;
     iframe {
@@ -88,7 +111,7 @@ export default function AboutMe() {
   return (
     <Container>
       <Header isPc={isPc}/>
-      <FirstView TitleText="About Me" isPc={isPc}/>
+      <FirstView TitleText="About Me"/>
       <Section>
         <SectionWrapper>
           <SectionTitle>About Me</SectionTitle>
