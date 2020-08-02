@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { window } from "ssr-window"
 import { TwitterTimelineEmbed } from 'react-twitter-embed'
 import { Link } from "gatsby"
 import styled from "@emotion/styled"
@@ -16,10 +17,10 @@ const Home = ({
     allMarkdownRemark: { edges },
   },
 }) => {
+
   const windowWidth = window.innerWidth;
   const isPcDefault = windowWidth >= 1080;
   const [isPc, setIsPc ] = useState(isPcDefault);
-
   window.addEventListener('resize', () => {
     const windowWidth = window.innerWidth;
     const isPc = windowWidth >= 1080;

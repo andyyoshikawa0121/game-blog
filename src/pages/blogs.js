@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { window } from "ssr-window"
 import { graphql } from "gatsby"
 import PostLink from "../components/post-link/index"
 import Header from "../components/header/index"
@@ -15,12 +16,12 @@ const Blogs = ({
   const windowWidth = window.innerWidth;
   const isPcDefault = windowWidth >= 1080;
   const [isPc, setIsPc ] = useState(isPcDefault);
-
   window.addEventListener('resize', () => {
     const windowWidth = window.innerWidth;
     const isPc = windowWidth >= 1080;
     setIsPc(isPc);
   });
+
   const Posts = edges
     .filter(edge => !!edge.node.frontmatter.date)
     .map(edge => <PostLink key={edge.node.id} post={edge.node} isPc={isPc}/>)
