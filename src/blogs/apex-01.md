@@ -1,6 +1,7 @@
 ---
 title: "スプラ経験者がApexで困ったこと"
 date: "2020-05-24"
+slug: "/blogs/different_from_splatoon"
 description: "Apexも余裕だろとか思ってたら全然出来ませんでした"
 ---
 

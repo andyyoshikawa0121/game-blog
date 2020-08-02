@@ -1,6 +1,7 @@
 ---
 title: "WattsonはWM、R-99"
 date: "2020-06-23"
+slug: "/blogs/loadout"
 description: "色んな点を変更するようにしたらうまくなりました"
 ---
 

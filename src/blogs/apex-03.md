@@ -1,6 +1,7 @@
 ---
 title: "Apex現状の改善点"
 date: "2020-06-16"
+slug: "/blogs/apex_note"
 description: 個人的なメモです
 ---
 
