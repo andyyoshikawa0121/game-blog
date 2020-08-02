@@ -55,11 +55,12 @@ export default function PostLink({ post, isPc }) {
   const BlogsTitle = styled.h2`
     @media (max-width: 1079px) {
       padding-left: 24px;
+      font-size: 16px;
     }
     @media (min-width: 1080px) {
       padding-left: 36px;
+      font-size: 20px;
     }
-    font-size: 20px;
     font-weight: 600;
     word-break: break-all;
   `
