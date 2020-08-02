@@ -3,10 +3,10 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 import Image from "../image/index"
 
-export default function FirstView() {
+export default function FirstView({ TitleText, isPc }) {
   const FirstView = styled.div`
     width: 100vw;
-    height: 80vh;
+    height: ${isPc ? '80vh' : '40vh'};
     min-height: 300px;
     background-color: gray;
     color: white;
@@ -19,10 +19,29 @@ export default function FirstView() {
     overflow: hidden;
     div {
       width: 100%;
-      height: 80vh;
+      height: ${isPc ? '80vh' : '40vh'};
       min-height: 300px;
-
     }
+  `
+  const TitleCard = styled.div`
+    border-right: 20vw solid transparent;
+    border-top: 100vh solid #64e830;
+    height: 50vh!important;
+    min-height: 300px!important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50vw!important;
+    z-index: 1;
+  `
+
+  const Title = styled.h2`
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    width: 50vw;
+    left: -5vw;
+    font-size: 6vw;
   `
   const Arrow = styled.div`
     width: 30px;
@@ -38,6 +57,10 @@ export default function FirstView() {
   return (
     <div>
       <FirstView>
+        <Title>
+          { TitleText }
+        </Title>
+        <TitleCard/>
         <Image filename="profile.png" />
       </FirstView>
       <Arrow/>

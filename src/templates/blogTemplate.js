@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Header from "../components/header/index"
 import Container from "../components/container/index"
@@ -9,6 +9,15 @@ import { css } from "@emotion/core"
 export default function BlogTemplate({
   data, // this prop will be injected by the GraphQL query below.
 }) {
+  const windowWidth = window.innerWidth;
+  const isPcDefault = windowWidth >= 1080;
+  const [isPc, setIsPc ] = useState(isPcDefault);
+
+  window.addEventListener('resize', () => {
+    const windowWidth = window.innerWidth;
+    const isPc = windowWidth >= 1080;
+    setIsPc(isPc);
+  });
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html } = markdownRemark
   const BlogSection = styled.div`
@@ -16,20 +25,19 @@ export default function BlogTemplate({
     padding-bottom: 48px;
   `
   const BlogWrapper = styled.div`
-    width: calc(100% - 200px);
-    max-width: 1280px;
-    min-width: 960px;
+    width: ${isPc ? 'calc(100% - 200px);' : '90%;'}
+    max-width: ${isPc && '1280px'};
+    min-width: ${isPc && '960px'};
     margin: 32px auto 0px auto;
   `
   const BlogTitle = styled.h2`
     color: #64e830;
-    font-size: 48px;
+    font-size: ${isPc ? '48px': '24px'};
     font-weight: 600;
     text-align: center;
     line-height: 1;
-    margin: 0 auto 32px auto;
-    padding-top: 64px;
-    width: 80%;
+    margin: ${isPc ? '64px auto':'32px auto 64px auto'};
+    width: ${isPc ? '80%':'100%'};
     position: relative;
     &::before {
       content: '';
@@ -45,7 +53,7 @@ export default function BlogTemplate({
   `
 
   const BlogDate = styled.p`
-    width: 800px;
+    width: ${isPc ? '800px':'100%'};
     margin: 0 auto 24px auto;
     font-size: 16px;
     font-weight: 600;
@@ -60,7 +68,7 @@ export default function BlogTemplate({
   `
 
   const BlogContent = styled.div`
-    width: 800px;
+    width: ${isPc ? '800px':'100%'};
     margin: 0 auto;
 
     h1 {
@@ -101,8 +109,8 @@ export default function BlogTemplate({
 
   return (
     <Container>
-      <Header />
-      <FirstView/>
+      <Header isPc={isPc}/>
+      <FirstView TitleText="Blog" isPc={isPc}/>
       <BlogSection>
         <BlogWrapper>
           <BlogTitle>{frontmatter.title}</BlogTitle>

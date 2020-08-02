@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { TwitterTimelineEmbed } from 'react-twitter-embed'
 import { Link } from "gatsby"
 import styled from "@emotion/styled"
@@ -16,9 +16,20 @@ const Home = ({
     allMarkdownRemark: { edges },
   },
 }) => {
+  const windowWidth = window.innerWidth;
+  const isPcDefault = windowWidth >= 1080;
+  const [isPc, setIsPc ] = useState(isPcDefault);
+
+  window.addEventListener('resize', () => {
+    const windowWidth = window.innerWidth;
+    const isPc = windowWidth >= 1080;
+    setIsPc(isPc);
+  });
+
   const Posts = edges
     .filter(edge => !!edge.node.frontmatter.date)
-    .map(edge => <PostLink key={edge.node.id} post={edge.node} />)
+    .map(edge => <PostLink key={edge.node.id} post={edge.node} isPc={isPc} />)
+
 
 
     const Section = styled.div`
@@ -27,21 +38,21 @@ const Home = ({
     `
 
     const SectionWrapper = styled.div`
-      width: calc(100% - 200px);
-      max-width: 1280px;
-      min-width: 960px;
-      padding: 32px 0 48px 0px;
+      width: ${isPc ? 'calc(100% - 200px);' : '90%;'}
+      max-width: ${isPc && '1280px'};
+      min-width: ${isPc && '960px'};
+      padding: 32px 0 ${isPc ? '48px' : '24px'} 0px;
       margin: 0 auto;
     `
 
     const SectionTitle = styled.h2`
       color: #64e830;
-      font-size: 48px;
+      font-size: ${isPc ? '48px': '24px'};
       font-weight: 600;
       text-align: center;
       line-height: 1;
-      margin: 64px auto;
-      width: 80%;
+      margin: ${isPc ? '64px auto':'32px auto 64px auto'};
+      width: ${isPc ? '80%':'100%'};
       position: relative;
       &::before {
         content: '';
@@ -63,7 +74,7 @@ const Home = ({
       font-size: 16px;
       text-align: left;
       line-height: 2;
-      width: 800px;
+      width: ${isPc ? '800px':'100%'};
       margin: 0 auto;
     `
     const SubSectionTitle = styled.h3`
@@ -75,7 +86,7 @@ const Home = ({
       margin: 36px 0px;
     `
     const SnsBox = styled.div`
-      width: 800px;
+      width: ${isPc ? '800px':'100%'};
       margin-top: 48px;
       margin: 0 auto;
       iframe {
@@ -84,14 +95,11 @@ const Home = ({
         display: block;
       }
     `
-    const s = document.createElement("script");
-    s.setAttribute("src", "https://platform.twitter.com/widgets.js");
-    document.body.appendChild(s);
 
   return (
     <Container>
-      <Header />
-      <FirstView/>
+      <Header isPc={isPc} />
+      <FirstView TitleText="Top" isPc={isPc}/>
       <Section>
         <SectionWrapper>
           <SectionTitle>
@@ -136,7 +144,7 @@ export const pageQuery = graphql`
           id
           excerpt(pruneLength: 250)
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "YYYY-MM-DD")
             slug
             title
           }

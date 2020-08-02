@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import PostLink from "../components/post-link/index"
 import Header from "../components/header/index"
@@ -12,24 +12,43 @@ const Blogs = ({
     allMarkdownRemark: { edges },
   },
 }) => {
+  const windowWidth = window.innerWidth;
+  const isPcDefault = windowWidth >= 1080;
+  const [isPc, setIsPc ] = useState(isPcDefault);
+
+  window.addEventListener('resize', () => {
+    const windowWidth = window.innerWidth;
+    const isPc = windowWidth >= 1080;
+    setIsPc(isPc);
+  });
   const Posts = edges
     .filter(edge => !!edge.node.frontmatter.date)
-    .map(edge => <PostLink key={edge.node.id} post={edge.node} />)
+    .map(edge => <PostLink key={edge.node.id} post={edge.node} isPc={isPc}/>)
 
 
   const Section = styled.div`
     width: 100vw;
     background-color: white;
-    padding: 128px 0;
+    padding-bottom: 128px;
   `
+
+  const SectionWrapper = styled.div`
+    width: ${isPc ? 'calc(100% - 200px);' : '90%;'}
+    max-width: ${isPc && '1280px'};
+    min-width: ${isPc && '960px'};
+    padding: 32px 0 ${isPc ? '48px' : '24px'} 0px;
+    margin: 0 auto;
+  `
+
+
   const SectionTitle = styled.h2`
     color: #64e830;
-    font-size: 48px;
+    font-size: ${isPc ? '48px': '24px'};
     font-weight: 600;
     text-align: center;
     line-height: 1;
-    margin: 64px auto;
-    width: 80%;
+    margin: ${isPc ? '64px auto':'32px auto 64px auto'};
+    width: ${isPc ? '80%':'100%'};
     position: relative;
     &::before {
       content: '';
@@ -48,11 +67,13 @@ const Blogs = ({
   `
   return (
     <Container>
-      <Header />
-      <FirstView/>
+      <Header isPc={isPc}/>
+      <FirstView TitleText="Blogs" isPc={isPc}/>
       <Section>
-        <SectionTitle>Blogs</SectionTitle>
-        {Posts}
+        <SectionWrapper>
+          <SectionTitle>Blogs</SectionTitle>
+          {Posts}
+        </SectionWrapper>
       </Section>
     </Container>
   );
